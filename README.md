@@ -1,19 +1,23 @@
-# strength_approximate
-C++ project for test Eigen methods in modelling cylindrical shell
+# Strength Approximate
+
+Modelling cylindrical shell
 
 This project was tested on Windows 8.1, x64 with MVS 2017.
 
 Dependecies:
 
-- use WINAPI stuff to control font color etc
-- eigen3:x86-windows, version: 3.3.4-2
+- use WINAPI implementation to control font color etc
 - UTF8 encoding of existing files
 * Highly recommended vcpkg to install dependencies
 
-Coming soon:
+Input:
 
-- evaluation of SDE tensor (at now it is zero matrix)
-- save output data (Cauchy-Krylov matrix)
+- geometrical and physical constants
+- dimension of matrices
+
+Output:
+
+- Cauchny - Krylov matrix
 
 License:
 
