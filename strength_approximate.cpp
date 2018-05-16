@@ -20,7 +20,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-#include "strength_approximate.h"
+#include "include/strength_approximate.h"
 
 /*-----WINAPI CONFIG START-----*/
 void SetColor(int text, int background)
@@ -437,7 +437,7 @@ void enter_data()//use and initialize input values
       break;
     }
     }
-  } while (flag != false);
+  } while (flag);
 }
 /*--------------------------------DATA INPUT END-------------------------------------*/
 
