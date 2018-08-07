@@ -9,7 +9,11 @@
 #include <fstream>
 #include <vector>
 #include <numeric>
+#include <algorithm>
+
+#define NOMINMAX //std::min - make unset 
 #include <Windows.h>
+#undef  NOMINMAX
 
 //Call for use implementation of Matrix class
 #include "../include/Matrix.h"

@@ -166,7 +166,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A_im2.print_matrix();
 
   int num_n;
-  num_n = phi_val / delta_phi_val; //amody > a > y, SDE order
+  num_n = static_cast<int> (phi_val / delta_phi_val); //amody > a > y, SDE order
 
   std::cout << "\nSDE order:\n\nn = " << num_n << std::endl;
 
@@ -180,7 +180,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   SDE.print_matrix();
 
   int num_m;
-  num_m = x_val / delta_x_val; //amody> a> y, the order m for the Cauchy-Krylov matrix
+  num_m = static_cast<int> (x_val / delta_x_val); //amody> a> y, the order m for the Cauchy-Krylov matrix
 
   std::cout << "\nThe exponent series for calculating the Cauchy-Krylov matrix:\n\nm = " << num_m << std::endl;
 
@@ -354,7 +354,7 @@ char GetInput()
 void DisplayMainMenu()
 {
   std::cout << "\n1 - enter values" << std::endl;
-  std::cout << "2 - use built in balues" << std::endl;
+  std::cout << "2 - use built in values" << std::endl;
   std::cout << "0 - exit\n";
 }
 

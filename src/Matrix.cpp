@@ -68,13 +68,13 @@ Matrix::Matrix(Matrix& A_im2, Matrix& A_im1, Matrix& A_i, Matrix& A_ip1, Matrix&
 }
 
 
-Matrix::getRowsCount()
+int Matrix::getRowsCount()
 {
   return this->rows;
 }
 
 
-Matrix::getColumnsCount()
+int Matrix::getColumnsCount()
 {
   return this->cols;
 }
@@ -177,7 +177,9 @@ void Matrix::power_matrix(int order)
 
         // min - check for the smallest value, the matrix must be square
         for (int l = 0; l < std::min(this->rows, this->cols); l++)
+        {
           lastVal += cur[i][l] * matrix[l][j];
+        }
         local_matrix.setElement(i, j, lastVal);
       }
     }
