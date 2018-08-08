@@ -27,7 +27,6 @@ def plot_data(xs, momentum):
     try:
 
         plt.plot(xs, momentum_list)
-        #plt.axis([0, np.max(xs), 0, np.max(momentum_list)])
         plt.title("Cylindrical shell momentum")
         plt.xlabel("X")
         plt.ylabel("M[X]")
