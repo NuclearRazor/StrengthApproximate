@@ -25,11 +25,17 @@ Output:
 
 Examples of plot:
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="left" height="100" width="200" ></a>
+<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="left" height="100" width="200" >
+</a>
+<br>
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="left" height="100" width="200" ></a>
+<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="left" height="100" width="200" >
+</a>
+<br>
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="left" height="100" width="200" ></a>
+<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="left" height="100" width="200" >
+</a>
+<br>
 
 License:
 
