@@ -25,11 +25,11 @@ Output:
 
 Examples of plot:
 
-![One of the greatest momentum values](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png = 250 * 100)
+![One of the greatest momentum values](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png){:height="100px" width="250px"}.
 
-![Oscillated momentum](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png = 250 * 100)
+![Oscillated momentum](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png = 250 * 100){:height="100px" width="250px"}.
 
-![Example of the medium values of momentum](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png = 250 * 100)
+![Example of the medium values of momentum](https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png = 250 * 100){:height="100px" width="250px"}.
 
 License:
 
