@@ -26,19 +26,19 @@ Output:
 Examples of plot:
 
 <pre>
-<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="middle" height="380">
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="middle" height="430">
 </a>
 </pre>
 
 
 <pre>
-<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="middle" height="380">
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="middle" height="430">
 </a>
 </pre>
 
 
 <pre>
-<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="middle" height="380">
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="middle" height="430">
 </a>
 </pre>
 
