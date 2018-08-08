@@ -25,15 +25,22 @@ Output:
 
 Examples of plot:
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="left" height="100">
+<pre>
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png" align="left" height="150">
 </a>
+</pre>
 
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="left" height="100">
+<pre>
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png" align="left" height="150">
 </a>
+</pre>
 
-<a href="url"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="left" height="100">
+
+<pre>
+<a href="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png"><img src="https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png" align="left" height="150">
 </a>
+</pre>
 
 License:
 
