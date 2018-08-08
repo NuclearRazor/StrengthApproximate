@@ -23,6 +23,14 @@ Output:
 - Cauchny - Krylov matrix
 - Plot graphic of x and M(x)
 
+Examples of plot:
+
+![]({{site.baseurl}}/https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_max.png)
+
+![]({{site.baseurl}}/https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_osc.png)
+
+![]({{site.baseurl}}/https://github.com/NuclearRazor/strength_approximate/blob/master/common/img/fig_sec.png)
+
 License:
 
 MIT
