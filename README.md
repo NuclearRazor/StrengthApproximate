@@ -9,7 +9,9 @@ Dependecies:
 
 - use WINAPI implementation to control font color etc
 - UTF8 encoding of existing files
-
+- PyQt dynamic libraries
+- Anaconda/... enviroment
+- Python API (Python.h include file in your project)
 
 Input:
 
@@ -19,6 +21,7 @@ Input:
 Output:
 
 - Cauchny - Krylov matrix
+- Plot graphic of x and M(x)
 
 License:
 

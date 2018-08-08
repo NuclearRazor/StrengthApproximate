@@ -1,4 +1,4 @@
-//MIT License
+﻿//MIT License
 //
 //Copyright(c) 2017 - 2018 Ivan Blagopoluchnyy
 //
@@ -22,6 +22,7 @@
 
 #include "include/strength_approximate.h"
 
+
 /*-----WINAPI CONFIG START-----*/
 void SetColor(int text, int background)
 {
@@ -37,6 +38,44 @@ void SetColorBgTex(int Bg = 0, int Tex = 15)
   SetConsoleTextAttribute(hConsole, Bg);
 }
 /*-----WINAPI CONFIG END-----*/
+
+
+/*---------------UI LOGIC START---------------*/
+char GetInput()
+{
+  char choice;
+  std::cin >> choice;
+  return choice;
+}
+
+
+void DisplayMainMenu()
+{
+  std::cout << "\n1 - enter values" << std::endl;
+  std::cout << "2 - use built in values" << std::endl;
+  std::cout << "0 - exit\n";
+}
+
+/*-----PYTHON SCRIPT CALLABLE START-----*/
+void CallPyPlotter()
+{
+  char filename[] = "momentum.py";
+  FILE* fp;
+
+  // initialuze python interpreter
+  Py_Initialize();
+
+  // pass file name in read mode
+  fp = _Py_fopen(filename, "r");
+
+  // run python script
+  PyRun_SimpleFile(fp, filename);
+
+  // finalize callables
+  Py_Finalize();
+}
+/*-----PYTHON SCRIPT CALLABLE END-----*/
+/*---------------UI LOGIC START---------------*/
 
 
 
@@ -331,32 +370,20 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     {
       for (int j = 0; j < unit_matrix_kk.getColumnsCount(); j++)
       {
-        std::cout << "\nM[" << i + 1 << "][" << j + 1 << "] = " << unit_matrix_kk.getElement(i, j);
+        //std::cout << "\nM[" << i + 1 << "][" << j + 1 << "] = " << unit_matrix_kk.getElement(i, j);
         save_data << "\nM[" << i + 1 << "][" << j + 1 << "] = " << unit_matrix_kk.getElement(i, j);
       }
     }
 
     std::cout << "\nData stored into data.txt" << std::endl;
 
+    // plot data by python api - matplotlib
+    CallPyPlotter();
+
   }
 }
 /*-------------------MATRIX CALCULATIONS END--------------------------*/
 
-
-char GetInput()
-{
-  char choice;
-  std::cin >> choice;
-  return choice;
-}
-
-
-void DisplayMainMenu()
-{
-  std::cout << "\n1 - enter values" << std::endl;
-  std::cout << "2 - use built in values" << std::endl;
-  std::cout << "0 - exit\n";
-}
 
 
 /*--------------------------------DATA INPUT START-------------------------------------*/
@@ -373,7 +400,9 @@ void enter_data()//use and initialize input values
 
   do
   {
+
     DisplayMainMenu();
+
     switch (GetInput())
     {
     case '1':
@@ -423,6 +452,8 @@ void enter_data()//use and initialize input values
       //calculate each strength tensor component
       evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
 
+
+
       break;
     }
     case '0':
@@ -443,7 +474,7 @@ void enter_data()//use and initialize input values
 
 
 /*-------------------------------MAIN ENTRY START--------------------------------------*/
-int main(void)
+int main(int argc, char **argv)
 {
 
   setlocale(LC_ALL, "");

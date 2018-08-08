@@ -4,6 +4,7 @@
 #define SA_H
 
 #define _USE_MATH_DEFINES //preprocessor directive to use mathematical constants
+#include <Python.h>
 #include <cmath> 
 #include <iostream> 
 #include <fstream>
