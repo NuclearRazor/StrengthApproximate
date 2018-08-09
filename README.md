@@ -8,7 +8,6 @@ Also include CMakelists.txt file.
 **Dependencies**:
 
 - use WINAPI implementation to control font color etc
-- UTF8 encoding of existing files
 - PyQt dynamic libraries
 - Anaconda/... enviroment
 - Python API (Python.h include file in your project)
