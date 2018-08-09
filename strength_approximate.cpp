@@ -48,11 +48,17 @@ char GetInput()
   return choice;
 }
 
+bool is_file_exist(const char *fileName)
+{
+  std::ifstream infile(fileName);
+  return infile.good();
+}
+
 
 void DisplayMainMenu()
 {
-  std::cout << "\n1 - enter values" << std::endl;
-  std::cout << "2 - use built in values" << std::endl;
+  std::cout << "\n1 - enter values" << "\n";
+  std::cout << "2 - use built in values" << "\n";
   std::cout << "0 - exit\n";
 }
 
@@ -62,17 +68,21 @@ void CallPyPlotter()
   char filename[] = "momentum.py";
   FILE* fp;
 
-  // initialuze python interpreter
-  Py_Initialize();
+  if (is_file_exist(filename))
+  {
+    // initialuze python interpreter
+    Py_Initialize();
 
-  // pass file name in read mode
-  fp = _Py_fopen(filename, "r");
+    // pass file name in read mode
+    fp = _Py_fopen(filename, "r");
 
-  // run python script
-  PyRun_SimpleFile(fp, filename);
+    // run python script
+    PyRun_SimpleFile(fp, filename);
 
-  // finalize callables
-  Py_Finalize();
+    // finalize callables
+    Py_Finalize();
+  }
+  else std::cout << "There no pyhon script file...\n";
 }
 /*-----PYTHON SCRIPT CALLABLE END-----*/
 /*---------------UI LOGIC START---------------*/
@@ -128,7 +138,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A1.setElement(5, 4, A1_a65);
   A1.setElement(5, 7, A1_a68);
   A1.setElement(6, 1, A1_a72);
-  std::cout << "\nMatrix A1:\n" << std::endl;
+  std::cout << "\nMatrix A1:\n" << "\n";
   A1.print_matrix();
 
   Matrix A2 = Matrix(DIM_A, DIM_A);
@@ -139,18 +149,18 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A2.setElement(6, 7, A2_a78);
   A2.setElement(7, 0, A1_a65);
   A2.setElement(7, 3, A2_a84);
-  std::cout << "\nMatrix A2:\n" << std::endl;
+  std::cout << "\nMatrix A2:\n" << "\n";
   A2.print_matrix();
 
   Matrix A3 = Matrix(DIM_A, DIM_A);
   A3.setElement(5, 2, A3_a63);
   A3.setElement(6, 1, A3_a72);
-  std::cout << "\nMatrix A3:\n" << std::endl;
+  std::cout << "\nMatrix A3:\n" << "\n";
   A3.print_matrix();
 
   Matrix A4 = Matrix(DIM_A, DIM_A);
   A4.setElement(6, 2, A4_a73);
-  std::cout << "\nMatrix A4:\n" << std::endl;
+  std::cout << "\nMatrix A4:\n" << "\n";
   A4.print_matrix();
 
   Matrix A5 = Matrix(DIM_A, DIM_A);
@@ -162,7 +172,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A5.setElement(6, 2, A5_a73);
   A5.setElement(6, 4, A5_a75);
   A5.setElement(7, 6, A5_a87);
-  std::cout << "\nMatrix A5:\n" << std::endl;
+  std::cout << "\nMatrix A5:\n" << "\n";
   A5.print_matrix();
 
   /*-------CALCULATION OF FINITE DIFFERENCES A_i+2, A_i+1, A_i, A_i-1, A_i-2---------*/
@@ -189,39 +199,39 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     }
   }
 
-  std::cout << "\n А i+2:\n" << std::endl;
+  std::cout << "\n А i+2:\n" << "\n";
   A_ip2.print_matrix();
 
-  std::cout << "\nА i+1:\n" << std::endl;
+  std::cout << "\nА i+1:\n" << "\n";
   A_ip1.print_matrix();
 
-  std::cout << "\nА i:\n" << std::endl;
+  std::cout << "\nА i:\n" << "\n";
   A_i.print_matrix();
 
-  std::cout << "\nА i-1:\n" << std::endl;
+  std::cout << "\nА i-1:\n" << "\n";
   A_im1.print_matrix();
 
-  std::cout << "\nА i-2:\n" << std::endl;
+  std::cout << "\nА i-2:\n" << "\n";
   A_im2.print_matrix();
 
   int num_n;
   num_n = static_cast<int> (phi_val / delta_phi_val); //amody > a > y, SDE order
 
-  std::cout << "\nSDE order:\n\nn = " << num_n << std::endl;
+  std::cout << "\nSDE order:\n\nn = " << num_n << "\n";
 
   /*---------------------------------SDE EVALUATION----------------------------------------*/
 
   //SDE fills by finite differences
   Matrix SDE = Matrix(A_im2, A_im1, A_i, A_ip1, A_ip2, num_n);
 
-  std::cout << "\nSDE tensor:\n" << std::endl;
+  std::cout << "\nSDE tensor:\n" << "\n";
 
   SDE.print_matrix();
 
   int num_m;
   num_m = static_cast<int> (x_val / delta_x_val); //amody> a> y, the order m for the Cauchy-Krylov matrix
 
-  std::cout << "\nThe exponent series for calculating the Cauchy-Krylov matrix:\n\nm = " << num_m << std::endl;
+  std::cout << "\nThe exponent series for calculating the Cauchy-Krylov matrix:\n\nm = " << num_m << "\n";
 
   /*---------------------------------MATRIX EXPONENT EVALUATION---------------------------------*/
 
@@ -230,7 +240,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   unit_matrix.getUnitMatrix();
 
-  std::cout << "\nThe identity matrix:\n" << std::endl;
+  std::cout << "\nThe identity matrix:\n" << "\n";
 
   unit_matrix.print_matrix();
 
@@ -249,7 +259,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     unit_matrix.mSum(SDE);
   }
 
-  std::cout << "\nCauchy-Krylov matrix for unit forces matrix is:\n" << std::endl;
+  std::cout << "\nCauchy-Krylov matrix for unit forces matrix is:\n" << "\n";
 
   unit_matrix.print_matrix();
 
@@ -292,11 +302,11 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   }
   /*---------------------LU END---------------------------*/
 
-  std::cout << "\nP - matrix (U):\n" << std::endl;
+  std::cout << "\nP - matrix (U):\n" << "\n";
 
   U_matrix.print_matrix();
 
-  std::cout << "\nQ - matrix (L):\n" << std::endl;
+  std::cout << "\nQ - matrix (L):\n" << "\n";
 
   L_matrix.print_matrix();
 
@@ -318,7 +328,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     }
   }
 
-  std::cout << "\nA = P*Q:\n" << std::endl;
+  std::cout << "\nA = P*Q:\n" << "\n";
 
   check_matrix.print_matrix();
 
@@ -331,7 +341,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   check_matrix.mSum(ExteriorForcesMatrix);
 
-  std::cout << "\n:\n" << std::endl;
+  std::cout << "\n:\n" << "\n";
 
   check_matrix.print_matrix();
 
@@ -355,14 +365,14 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     unit_matrix_kk.mSum(check_matrix);
   }
 
-  std::cout << "\nFinal matrix is:\n" << std::endl;
+  std::cout << "\nFinal matrix is:\n" << "\n";
 
   unit_matrix_kk.print_matrix();
 
   std::ofstream save_data("data.txt");
 
   if (!save_data.is_open())
-    std::cout << "\nError while creating data.txt" << std::endl;
+    std::cout << "\nError while creating data.txt" << "\n";
   else
   {
 
@@ -375,7 +385,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
       }
     }
 
-    std::cout << "\nData stored into data.txt" << std::endl;
+    std::cout << "\nData stored into data.txt" << "\n";
 
     // plot data by python api - matplotlib
     CallPyPlotter();
@@ -389,7 +399,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 /*--------------------------------DATA INPUT START-------------------------------------*/
 void enter_data()//use and initialize input values
 {
-  std::cout << "\nInput of initial data\n" << std::endl;
+  std::cout << "\nInput of initial data\n" << "\n";
 
   double R = 0.0, x = 0.0, phi = 0.0, h = 0.0, E_mod = 0.0, nu = 0.0,
     phi_buf = 0.0, delta_phi = 0.0, delta_pbuf = 0.0, delta_x = 0.0;
@@ -408,7 +418,7 @@ void enter_data()//use and initialize input values
     case '1':
     {
 
-      std::cout << "\nEnter values:" << std::endl;
+      std::cout << "\nEnter values:" << "\n";
       std::cout << "\nR = "; std::cin >> R;
       std::cout << "\nx = "; std::cin >> x;
       std::cout << "\nphi (°C) = "; std::cin >> phi;
@@ -430,19 +440,19 @@ void enter_data()//use and initialize input values
     case '2':
     {
 
-      std::cout << "\nDefault values:" << std::endl;
+      std::cout << "\nDefault values:" << "\n";
       //in SI (m, Pa), degree (phi) in radians
 
       //is given
       R = 2.0; x = 5.0; phi = 60.0; h = 0.1; nu = 0.34; E_mod = 6180;
 
-      std::cout << "\nR = " << R << std::endl;
-      std::cout << "\nx = " << x << std::endl;
-      std::cout << "\nphi = " << phi << " °C" << std::endl; //in °C
-      std::cout << "\nh = " << h << std::endl;
-      std::cout << "\nE = " << E_mod << std::endl;
-      std::cout << "\nnu = " << nu << std::endl;
-      //std::cout << "\nStep = " << step << std::endl;
+      std::cout << "\nR = " << R << "\n";
+      std::cout << "\nx = " << x << "\n";
+      std::cout << "\nphi = " << phi << " °C" << "\n"; //in °C
+      std::cout << "\nh = " << h << "\n";
+      std::cout << "\nE = " << E_mod << "\n";
+      std::cout << "\nnu = " << nu << "\n";
+      //std::cout << "\nStep = " << step << "\n";
       std::cout << "\nenter delta(phi) (°C) = "; std::cin >> delta_phi; //enter in °C
       std::cout << "\ndelta(x) = "; std::cin >> delta_x; //enter in m
 
@@ -451,9 +461,6 @@ void enter_data()//use and initialize input values
 
       //calculate each strength tensor component
       evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
-
-
-
       break;
     }
     case '0':
@@ -463,7 +470,7 @@ void enter_data()//use and initialize input values
     default:
     {
       SetColor(12, 0);
-      std::cout << "\nIncorrect choise!" << std::endl;
+      std::cout << "\nIncorrect choise!" << "\n";
       SetColor(15, 0);
       break;
     }
@@ -477,16 +484,10 @@ void enter_data()//use and initialize input values
 int main(int argc, char **argv)
 {
 
-  setlocale(LC_ALL, "");
-  //if you have an a 1251/866 encoding in yours console output
-  //you can use it winapi cheats (check it with chcp cmd):
-  //SetConsoleCP(1251);
-  //SetConsoleOutputCP(1251);
-
   //or use own config
   std::streamsize ss = std::cout.precision();
 
-  std::cout << "\nEnter the number of decimal places:\n" << std::endl;
+  std::cout << "\nEnter the number of decimal places:\n" << "\n";
 
   int k_enter = 0;
 

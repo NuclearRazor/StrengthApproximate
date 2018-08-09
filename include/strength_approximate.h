@@ -33,5 +33,7 @@ void enter_data();
 void evaluate_matrix(double& radius, double& x_val, double& phi_val, double& h_val, double& E_mod_val, double& nu_val, double& delta_phi_val, double& delta_x_val);
 char GetInput();
 void DisplayMainMenu();
+bool is_file_exist(const char *fileName);
+void CallPyPlotter();
 
 #endif
