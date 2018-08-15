@@ -48,6 +48,7 @@ char GetInput()
   return choice;
 }
 
+
 bool is_file_exist(const char *fileName)
 {
   std::ifstream infile(fileName);
@@ -57,10 +58,11 @@ bool is_file_exist(const char *fileName)
 
 void DisplayMainMenu()
 {
-  std::cout << "\n1 - enter values" << "\n";
-  std::cout << "2 - use built in values" << "\n";
-  std::cout << "0 - exit\n";
+  std::cout << "\n\t1 - enter values" << "\n";
+  std::cout << "\t2 - use built in values" << "\n";
+  std::cout << "\t0 - exit\n";
 }
+
 
 /*-----PYTHON SCRIPT CALLABLE START-----*/
 void CallPyPlotter()
@@ -86,7 +88,6 @@ void CallPyPlotter()
 }
 /*-----PYTHON SCRIPT CALLABLE END-----*/
 /*---------------UI LOGIC START---------------*/
-
 
 
 /*-------------------MATRIX CALCULATIONS START--------------------------*/
@@ -127,7 +128,8 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
     A5_a75 = nu_val / radius,
     A5_a87 = 1.0; //A5_ij != 0
 
-                  /*------------CALCULATION TENSOR COMPONENTS A1, A2, A3, A4, A5-----------*/
+
+  /*------------CALCULATION TENSOR COMPONENTS A1, A2, A3, A4, A5-----------*/
 
   Matrix A1 = Matrix(DIM_A, DIM_A);
   A1.setElement(0, 1, A1_a12);
@@ -139,7 +141,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A1.setElement(5, 7, A1_a68);
   A1.setElement(6, 1, A1_a72);
   std::cout << "\nMatrix A1:\n" << "\n";
-  A1.print_matrix();
+  A1.printMatrix();
 
   Matrix A2 = Matrix(DIM_A, DIM_A);
   A2.setElement(3, 2, A2_a43);
@@ -150,18 +152,18 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A2.setElement(7, 0, A1_a65);
   A2.setElement(7, 3, A2_a84);
   std::cout << "\nMatrix A2:\n" << "\n";
-  A2.print_matrix();
+  A2.printMatrix();
 
   Matrix A3 = Matrix(DIM_A, DIM_A);
   A3.setElement(5, 2, A3_a63);
   A3.setElement(6, 1, A3_a72);
   std::cout << "\nMatrix A3:\n" << "\n";
-  A3.print_matrix();
+  A3.printMatrix();
 
   Matrix A4 = Matrix(DIM_A, DIM_A);
   A4.setElement(6, 2, A4_a73);
   std::cout << "\nMatrix A4:\n" << "\n";
-  A4.print_matrix();
+  A4.printMatrix();
 
   Matrix A5 = Matrix(DIM_A, DIM_A);
   A5.setElement(0, 2, A5_a13);
@@ -173,7 +175,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   A5.setElement(6, 4, A5_a75);
   A5.setElement(7, 6, A5_a87);
   std::cout << "\nMatrix A5:\n" << "\n";
-  A5.print_matrix();
+  A5.printMatrix();
 
   /*-------CALCULATION OF FINITE DIFFERENCES A_i+2, A_i+1, A_i, A_i-1, A_i-2---------*/
 
@@ -184,9 +186,9 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   Matrix A_im1 = Matrix(DIM_A, DIM_A);
   Matrix A_im2 = Matrix(DIM_A, DIM_A);
 
-  for (int i = 0; i < DIM_A; i++)
+  for (unsigned int i = 0; i < DIM_A; i++)
   {
-    for (int j = 0; j < DIM_A; j++)
+    for (unsigned int j = 0; j < DIM_A; j++)
     {
       A_ip2.setElement(i, j, (1.0 / (1.0*pow(delta_phi_val, 3.0)))*A3.getElement(i, j) + (1.0 / (pow(delta_phi_val, 4.0)))*A4.getElement(i, j));
       A_ip1.setElement(i, j, (1.0 / (2.0*delta_phi_val))*A1.getElement(i, j) + (1.0 / (pow(delta_phi_val, 2.0)))*A2.getElement(i, j)
@@ -200,21 +202,21 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
   }
 
   std::cout << "\n А i+2:\n" << "\n";
-  A_ip2.print_matrix();
+  A_ip2.printMatrix();
 
   std::cout << "\nА i+1:\n" << "\n";
-  A_ip1.print_matrix();
+  A_ip1.printMatrix();
 
   std::cout << "\nА i:\n" << "\n";
-  A_i.print_matrix();
+  A_i.printMatrix();
 
   std::cout << "\nА i-1:\n" << "\n";
-  A_im1.print_matrix();
+  A_im1.printMatrix();
 
   std::cout << "\nА i-2:\n" << "\n";
-  A_im2.print_matrix();
+  A_im2.printMatrix();
 
-  int num_n;
+  int num_n = 0;
   num_n = static_cast<int> (phi_val / delta_phi_val); //amody > a > y, SDE order
 
   std::cout << "\nSDE order:\n\nn = " << num_n << "\n";
@@ -226,9 +228,9 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nSDE tensor:\n" << "\n";
 
-  SDE.print_matrix();
+  SDE.printMatrix();
 
-  int num_m;
+  int num_m = 0;
   num_m = static_cast<int> (x_val / delta_x_val); //amody> a> y, the order m for the Cauchy-Krylov matrix
 
   std::cout << "\nThe exponent series for calculating the Cauchy-Krylov matrix:\n\nm = " << num_m << "\n";
@@ -242,13 +244,13 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nThe identity matrix:\n" << "\n";
 
-  unit_matrix.print_matrix();
+  unit_matrix.printMatrix();
 
-  double value_x = 0;
+  double value_x = 0.0;
 
   for (int t = 1; t <= num_m; t++) //m <= n
   {
-    SDE.power_matrix(t);
+    SDE^(t);
 
     value_x = value_x + pow(delta_x_val, t);
 
@@ -261,7 +263,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nCauchy-Krylov matrix for unit forces matrix is:\n" << "\n";
 
-  unit_matrix.print_matrix();
+  unit_matrix.printMatrix();
 
   /*---------------------COMPUTATION OF MATRICES P AND Q BY MEANS OF LU - DECOMPOSITIONS---------------------------*/
 
@@ -304,11 +306,11 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nP - matrix (U):\n" << "\n";
 
-  U_matrix.print_matrix();
+  U_matrix.printMatrix();
 
   std::cout << "\nQ - matrix (L):\n" << "\n";
 
-  L_matrix.print_matrix();
+  L_matrix.printMatrix();
 
   //check calculations
   Matrix check_matrix = Matrix(unit_matrix.getRowsCount(), unit_matrix.getColumnsCount());
@@ -330,11 +332,11 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nA = P*Q:\n" << "\n";
 
-  check_matrix.print_matrix();
+  check_matrix.printMatrix();
 
   /*--------------SUM CAUCHY-KRYLOV MATRIX WITH MATRIX OF EXTERIOR FORCES-----------------*/
-  //it can also be initialized, for an ideal case we take it as a single
 
+  //it can also be initialized, for an ideal case we take it as a single
   Matrix ExteriorForcesMatrix = Matrix(check_matrix.getRowsCount(), check_matrix.getRowsCount());
 
   ExteriorForcesMatrix.getUnitMatrix();
@@ -343,18 +345,18 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\n:\n" << "\n";
 
-  check_matrix.print_matrix();
+  check_matrix.printMatrix();
 
   /*---------------------FINAL EVALUATION (DECOMPOSE BY EXP SERIES) FOR (CAUCHY-KRYLOV + EXTERIOR FORCES) MATRIX--------------------------*/
   Matrix unit_matrix_kk = Matrix(check_matrix.getRowsCount(), check_matrix.getColumnsCount());
 
   unit_matrix_kk.getUnitMatrix();
 
-  double value_variable = 0;
+  double value_variable = 0.0;
 
   for (int t = 1; t <= num_m; t++) //m <= n
   {
-    check_matrix.power_matrix(t);
+    check_matrix^(t);
 
     value_variable = value_variable + pow(delta_x_val, t);
 
@@ -367,7 +369,7 @@ void evaluate_matrix(double& radius, double& x_val, double& phi_val,
 
   std::cout << "\nFinal matrix is:\n" << "\n";
 
-  unit_matrix_kk.print_matrix();
+  unit_matrix_kk.printMatrix();
 
   std::ofstream save_data("data.txt");
 
@@ -415,66 +417,67 @@ void enter_data()//use and initialize input values
 
     switch (GetInput())
     {
-    case '1':
-    {
+      case '1':
+      {
 
-      std::cout << "\nEnter values:" << "\n";
-      std::cout << "\nR = "; std::cin >> R;
-      std::cout << "\nx = "; std::cin >> x;
-      std::cout << "\nphi (°C) = "; std::cin >> phi;
-      std::cout << "\nh = "; std::cin >> h;
-      std::cout << "\nE = "; std::cin >> E_mod;
-      std::cout << "\nnu = "; std::cin >> nu;
-      //std::cout << "\nStep = "; std::cin >> step;
-      std::cout << "\ndelta(phi) (°C) = "; std::cin >> delta_phi;
-      std::cout << "\ndelta(x) = "; std::cin >> delta_x; //in meters
+        std::cout << "\nEnter values:" << "\n";
+        std::cout << "\nR = "; std::cin >> R;
+        std::cout << "\nx = "; std::cin >> x;
+        std::cout << "\nphi (C) = "; std::cin >> phi;
+        std::cout << "\nh = "; std::cin >> h;
+        std::cout << "\nE = "; std::cin >> E_mod;
+        std::cout << "\nnu = "; std::cin >> nu;
+        //std::cout << "\nStep = "; std::cin >> step;
+        std::cout << "\ndelta(phi) (C) = "; std::cin >> delta_phi;
+        std::cout << "\ndelta(x) = "; std::cin >> delta_x; //in meters
 
-      phi_buf = phi * (M_PI / 180.0); //phi in radians
-      delta_pbuf = delta_phi * (M_PI / 180.0);
+        phi_buf = phi * (M_PI / 180.0); //phi in radians
+        delta_pbuf = delta_phi * (M_PI / 180.0);
 
-      //calculate each strength tensor component
-      evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
+        //calculate each strength tensor component
+        evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
 
-      break;
+        break;
+      }
+      case '2':
+      {
+
+        std::cout << "\nDefault values:" << "\n";
+        //in SI (m, Pa), degree (phi) in radians
+
+        //is given
+        R = 2.0; x = 5.0; phi = 60.0; h = 0.1; nu = 0.34; E_mod = 6180;
+
+        std::cout << "\nR = " << R << "\n";
+        std::cout << "\nx = " << x << "\n";
+        std::cout << "\nphi = " << phi << " °C" << "\n"; //in °C
+        std::cout << "\nh = " << h << "\n";
+        std::cout << "\nE = " << E_mod << "\n";
+        std::cout << "\nnu = " << nu << "\n";
+        //std::cout << "\nStep = " << step << "\n";
+        std::cout << "\nenter delta(phi) (C) = "; std::cin >> delta_phi; //enter in °C
+        std::cout << "\ndelta(x) = "; std::cin >> delta_x; //enter in m
+
+        phi_buf = phi * (M_PI / 180.0); //phi in radians
+        delta_pbuf = delta_phi * (M_PI / 180.0);
+
+        //calculate each strength tensor component
+        evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
+        break;
+      }
+      case '0':
+        flag = false;
+        break;
+
+      default:
+      {
+        SetColor(12, 0);
+        std::cout << "\nIncorrect choice!" << "\n";
+        SetColor(15, 0);
+        break;
+      }
     }
-    case '2':
-    {
 
-      std::cout << "\nDefault values:" << "\n";
-      //in SI (m, Pa), degree (phi) in radians
-
-      //is given
-      R = 2.0; x = 5.0; phi = 60.0; h = 0.1; nu = 0.34; E_mod = 6180;
-
-      std::cout << "\nR = " << R << "\n";
-      std::cout << "\nx = " << x << "\n";
-      std::cout << "\nphi = " << phi << " °C" << "\n"; //in °C
-      std::cout << "\nh = " << h << "\n";
-      std::cout << "\nE = " << E_mod << "\n";
-      std::cout << "\nnu = " << nu << "\n";
-      //std::cout << "\nStep = " << step << "\n";
-      std::cout << "\nenter delta(phi) (°C) = "; std::cin >> delta_phi; //enter in °C
-      std::cout << "\ndelta(x) = "; std::cin >> delta_x; //enter in m
-
-      phi_buf = phi * (M_PI / 180.0); //phi in radians
-      delta_pbuf = delta_phi * (M_PI / 180.0);
-
-      //calculate each strength tensor component
-      evaluate_matrix(R, x, phi_buf, h, E_mod, nu, delta_pbuf, delta_x);
-      break;
-    }
-    case '0':
-      flag = false;
-      break;
-
-    default:
-    {
-      SetColor(12, 0);
-      std::cout << "\nIncorrect choise!" << "\n";
-      SetColor(15, 0);
-      break;
-    }
-    }
   } while (flag);
 }
 /*--------------------------------DATA INPUT END-------------------------------------*/

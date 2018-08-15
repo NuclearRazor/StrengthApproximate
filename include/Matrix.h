@@ -51,7 +51,7 @@ public:
 
 
   /*-------------------RAISE MATRIX TO DEGREE-------------------*/
-  void power_matrix(int order);
+  Matrix operator ^ (int order);
 
 
   /*-------------------GET MATRIX ELEMENT BY COLUMN AND ROW INDEX-------------------*/
@@ -63,7 +63,7 @@ public:
 
 
   /*-------------------PRINT OUT MATRIX-------------------*/
-  void print_matrix();
+  void printMatrix();
 
 };
 

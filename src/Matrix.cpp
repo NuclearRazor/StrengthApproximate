@@ -26,33 +26,31 @@ Matrix::Matrix(Matrix& A_im2, Matrix& A_im1, Matrix& A_i, Matrix& A_ip1, Matrix&
   this->rows = dimension;
   this->cols = dimension;
 
-  //how many matrices will be filled in current tensor, The implementation is correct, but it is necessary to take into the formulation of the problem
-  int fill = dimension / DIM_A;
+  //counter for how many matrices will be filled in current tensor
+  int fill = static_cast<int> (dimension / DIM_A);
 
   //counter for filled matrices
   int push = 0;
 
   Matrix& cur = A_i;
 
+  //this loop as an option for generate diagonal Tensor
+  //that fills with 5 matricies
   for (int i = 0; i < this->rows; i++)
   {
-    if (push == 0 || push % 5 == 0)
-      cur = A_im2;
-    else if (push == 1 || push % 6 == 0)
-      cur = A_im1;
-    else if (push == 2 || push % 7 == 0)
-      cur = A_i;
-    else if (push == 3 || push % 8 == 0)
-      cur = A_ip1;
-    else if (push == 4 || push % 9 == 0)
-      cur = A_ip2;
+    if (push == 0 || push % 5 == 0) cur = A_im2;
+    else if (push == 1 || push % 6 == 0) cur = A_im1;
+    else if (push == 2 || push % 7 == 0) cur = A_i;
+    else if (push == 3 || push % 8 == 0) cur = A_ip1;
+    else if (push == 4 || push % 9 == 0) cur = A_ip2;
 
     //vector <-> string that we fill in the matrix
     std::vector <long double> curRow;
 
     for (int j = 0; j < this->cols; j++)
     {
-      //fill with zeros "left" (these are zeros under the main diagonal of the tensor)
+      //fill with zeros "left" 
+      //(these are zeros under the main diagonal of the tensor)
       if (j < push*DIM_A)
         curRow.push_back(0.0);
 
@@ -80,7 +78,7 @@ int Matrix::getColumnsCount()
 }
 
 
-std::vector<std::vector<long double>> Matrix::getMatrix()
+std::vector < std::vector<long double> > Matrix::getMatrix()
 {
   return matrix;
 }
@@ -94,7 +92,8 @@ std::vector < std::vector <long double> > Matrix::getUnitMatrix()
   {
     for (int j = 0; j < this->cols; j++)
     {
-      //for the main diagonal // || j == DIM - i - 1) // for the secondary diagonal
+      //for the main diagonal 
+      // || j == DIM - i - 1) // for the secondary diagonal
       if (i == j)
         local_unit_matrix.setElement(i, j, 1.0);
     }
@@ -106,20 +105,14 @@ std::vector < std::vector <long double> > Matrix::getUnitMatrix()
 }
 
 
-std::vector < std::vector <long double> > Matrix::div(double x)
-{
+std::vector < std::vector <long double> > Matrix::div(double x){
   Matrix local_unit_matrix(this->rows, this->cols);
 
   //you can use assert
-
   //use simple logic to catch division by zero
-  if (x == 0)
-  {
-    std::cout << "\nDivision by zero!\n" << std::endl;
-  }
+  if (x == 0){ std::cout << "\nDivision by zero!\n" << std::endl;}
   //else divide each matrix element by scalar value
-  else
-  {
+  else {
     for (int i = 0; i < this->rows; i++)
       for (int j = 0; j < this->cols; j++)
         local_unit_matrix.setElement(i, j, matrix[i][j] / x);
@@ -156,8 +149,9 @@ Matrix Matrix::mSum(Matrix obj)
 }
 
 
-void Matrix::power_matrix(int order)
+ Matrix Matrix::operator ^ (int order)
 {
+
   Matrix local_matrix(this->rows, this->cols);
 
   std::vector<std::vector<long double>> cur = matrix;
@@ -185,11 +179,12 @@ void Matrix::power_matrix(int order)
     }
   }
 
-  if (order > 1)
-  {
-    matrix = local_matrix.getMatrix();
-  }
-}
+  //update matrix
+  matrix = local_matrix.getMatrix();
+
+  return *this;
+
+};
 
 
 double Matrix::getElement(int rowIndex, int colIndex)
@@ -214,7 +209,7 @@ void Matrix::setElement(int rowIndex, int colIndex, double val)
 }
 
 
-void Matrix::print_matrix()
+void Matrix::printMatrix()
 {
   for (std::vector<std::vector<int>>::size_type i = 0; i < matrix.size(); i++)
   {

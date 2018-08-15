@@ -38,9 +38,6 @@ def plot_data(xs, momentum):
         print('Maybe you got quazi singular matrix')
 
 
-    return 0
-
-
 momentum_list = parse_data()
 
 xs = [i for i in range(0, len(momentum_list))]
@@ -50,7 +47,3 @@ print('\n<X> = {}'.format(np.mean(xs)))
 print('<M[X]> = {}'.format(np.mean(momentum_list)))
 
 plot_data(xs, momentum_list)
-
-
-
-
